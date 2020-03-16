@@ -1,7 +1,7 @@
 # covid19
 Analyses about the COVID-19 virus
 
-# Running the covid19 project in Docker
+## Running the covid19 project in Docker
 
 To run this project on your local docker install, simply execute the `./run.sh` command in Terminal.
 
