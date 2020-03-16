@@ -5,5 +5,4 @@ seaborn
 arviz
 pymc3
 requests
-io
 
