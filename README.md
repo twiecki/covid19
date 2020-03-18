@@ -1,5 +1,4 @@
 # covid19
-<<<<<<< HEAD
 Analyses about the COVID-19 virus
 
 ## Running the covid19 project in Docker
