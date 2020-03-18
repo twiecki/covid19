@@ -24,5 +24,3 @@ Interactive notebooks on mybinder:
 
 https://mybinder.org/v2/gh/twiecki/covid19/master?filepath=covid19_growth.ipynb
 
-
->>>>>>> upstream/master
