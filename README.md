@@ -1,4 +1,5 @@
 # covid19
+<<<<<<< HEAD
 Analyses about the COVID-19 virus
 
 ## Running the covid19 project in Docker
@@ -17,3 +18,12 @@ In the terminal session a link for the Jupyter Nobeook Server will appear, along
 ```
 
 Copy and past the link in your browser to access the Server.
+=======
+Analyses about the COVID-19 virus.
+
+Interactive notebooks on mybinder:
+
+https://mybinder.org/v2/gh/twiecki/covid19/master?filepath=covid19_growth.ipynb
+
+
+>>>>>>> upstream/master
