@@ -1,5 +1,5 @@
 # covid19
-Analyses about the COVID-19 virus
+Analyses about the COVID-19 virus.
 
 ## Running the covid19 project in local Docker
 
@@ -23,5 +23,5 @@ Copy and past the link in your browser to access the Server.
 
 If you don't have access to a local Docker or Jupyter Server, you can run the notebooks in an interactive session on mybinder:
 
-https://mybinder.org/v2/gh/SchuhMichael/covid19/master
+https://mybinder.org/v2/gh/twiecki/covid19/master
 
