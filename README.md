@@ -1,7 +1,7 @@
 # covid19
 Analyses about the COVID-19 virus
 
-## Running the covid19 project in Docker
+## Running the covid19 project in local Docker
 
 To run this project on your local docker install, simply execute the `./run.sh` command in Terminal.
 
@@ -18,9 +18,10 @@ In the terminal session a link for the Jupyter Nobeook Server will appear, along
 
 Copy and past the link in your browser to access the Server.
 =======
-Analyses about the COVID-19 virus.
 
-Interactive notebooks on mybinder:
+## Running the covid19 project notebooks on mybinder
 
-https://mybinder.org/v2/gh/twiecki/covid19/master?filepath=covid19_growth.ipynb
+If you don't have access to a local Docker or Jupyter Server, you can run the notebooks in an interactive session on mybinder:
+
+https://mybinder.org/v2/gh/SchuhMichael/covid19/master
 
