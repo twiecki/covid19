@@ -16,7 +16,9 @@ def get_sqlite_from_web():
     sqlite_db_path = Path("covid.db")
     # would be convenient to have at least a content-length or
     # etag header for caching, caching for 2h for now
-    seconds_since_last_download = (datetime.now() - datetime.fromtimestamp(sqlite_db_path.stat().st_mtime)).seconds
+    seconds_since_last_download = (
+        datetime.now() - datetime.fromtimestamp(sqlite_db_path.stat().st_mtime)
+    ).seconds
     outdated = seconds_since_last_download > 7200
     if not sqlite_db_path.exists() or outdated:
         response = requests.get("https://covid-19.datasettes.com/covid.db")
@@ -37,11 +39,17 @@ def initial_cleanup(df):
     """
     column_map = {"country_or_region": "country"}
     relevant_columns = ["country", "date", "confirmed", "deaths", "recovered", "active"]
-    return (df.assign(date=pd.to_datetime(df.day, yearfirst=True))
-              .drop(columns=["day"])
-              .rename(columns=column_map)
-              .fillna(value={"active": 0})
-    )[relevant_columns].groupby(["country", "date"]).sum().reset_index()
+    return (
+        (
+            df.assign(date=pd.to_datetime(df.day, yearfirst=True))
+            .drop(columns=["day"])
+            .rename(columns=column_map)
+            .fillna(value={"active": 0})
+        )[relevant_columns]
+        .groupby(["country", "date"])
+        .sum()
+        .reset_index()
+    )
 
 
 def add_confirmed_after_n_days_column(df, n_days=100, relevant_threshold=1000):
@@ -49,9 +57,9 @@ def add_confirmed_after_n_days_column(df, n_days=100, relevant_threshold=1000):
     affected_country = df.country.isin(affected_countries)
     query = (df.confirmed >= n_days) & affected_country
     cols = ["country", "date"]
-    date_since_n_lookup = dict((df[query][cols].groupby("country")
-                                               .min()
-                                               .reset_index()).values)
+    date_since_n_lookup = dict(
+        (df[query][cols].groupby("country").min().reset_index()).values
+    )
     first_confirmed_date = f"first_{n_days}_confirmed_date"
     days_since = f"days_since_{n_days}"
     df[first_confirmed_date] = df.country.apply(lambda x: date_since_n_lookup.get(x))
@@ -62,7 +70,7 @@ def add_confirmed_after_n_days_column(df, n_days=100, relevant_threshold=1000):
 
 
 def add_estimated_critical_cases(df):
-    df["critical_estimate"] = (df.confirmed * .05).astype(np.int32)
+    df["critical_estimate"] = (df.confirmed * 0.05).astype(np.int32)
     return df
 
 
@@ -73,8 +81,10 @@ def replace_country_names(df):
 
 
 def filter_by_number_of_days_after_100(df, filter_n_days_100):
-    # Select countries for which we have at least some information
-    countries = pd.Series(df.loc[df.days_since_100 >= filter_n_days_100].country.unique())
+    """Select countries for which we have at least some information."""
+    countries = pd.Series(
+        df.loc[df.days_since_100 >= filter_n_days_100].country.unique()
+    )
     df = df.loc[lambda x: x.country.isin(countries)]
     return df
 
