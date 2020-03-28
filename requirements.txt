@@ -5,4 +5,7 @@ seaborn
 arviz
 pymc3
 requests
-
+jupyter
+altair
+typing-extensions
+git+https://github.com/aseyboldt/sunode
