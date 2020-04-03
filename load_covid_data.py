@@ -77,3 +77,25 @@ def load_data(drop_states=False, p_crit=.05, filter_n_days_100=None):
         df = df.loc[lambda x: x.country.isin(countries)]
 
     return df
+
+def load_data_ecdc(p_crit=.05, filter_n_days_100=None):
+    df = pd.read_csv('https://covid.ourworldindata.org/data/ecdc/full_data.csv', 
+                     index_col='date', parse_dates=True)
+    df = df.rename(columns={'location': 'country', 'total_cases': 'confirmed', 'total_deaths': 'deaths'})
+        
+    # Estimated critical cases
+    df = df.assign(critical_estimate=df.confirmed*p_crit)
+
+    # Compute days relative to when 100 confirmed cases was crossed
+    df.loc[:, 'days_since_100'] = np.nan
+    for country in df.country.unique():
+        df.loc[(df.country == country), 'days_since_100'] = \
+            np.arange(-len(df.loc[(df.country == country) & (df.confirmed < 100)]), 
+                      len(df.loc[(df.country == country) & (df.confirmed >= 100)]))
+  
+    if filter_n_days_100 is not None:
+        # Select countries for which we have at least some information
+        countries = pd.Series(df.loc[df.days_since_100 >= filter_n_days_100].country.unique())
+        df = df.loc[lambda x: x.country.isin(countries)]
+
+    return df
