@@ -5,7 +5,7 @@ Analyses about the COVID-19 virus.
 
 To run this project on your local docker install, simply execute the `./run.sh` command in Terminal.
 
-In the terminal session a link for the Jupyter Nobeook Server will appear, alongside your token:
+In the terminal session a link for the Jupyter Notebook Server will appear, alongside your token:
 
 ```bash
 
