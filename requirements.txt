@@ -3,7 +3,7 @@ matplotlib
 pandas
 seaborn
 arviz
-pymc3
+pymc>=6
 requests
 jupyter
 altair
