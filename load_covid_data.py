@@ -23,10 +23,10 @@ def load_individual_timeseries(name):
     df.loc[df.state =='Hong Kong', 'state'] = np.nan
     
     # Aggregate large countries split by states
-    df = pd.concat([df, 
+    df = pd.concat([df,
                     (df.loc[~df.state.isna()]
                      .groupby(['country', 'date', 'type'])
-                     .sum()
+                     [['cases']].sum()
                      .rename(index=lambda x: x+' (total)', level=0)
                      .reset_index(level=['country', 'type']))
                    ])
